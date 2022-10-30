@@ -3,8 +3,8 @@ import java.util.Random;
 public class Sort {
     public static void main(String[] args){
         int[] arr = new int[10000];
-        for (int i= arr.length; i > 0; i--){
-            arr[arr.length-i] = new Random().nextInt(10000);
+        for (int i= 0; i < arr.length; i++){
+            arr[i] = new Random().nextInt(10000);
         }
 //        int[] arr = {9,8,7,6,5,4,3,1,2};
         long start = System.currentTimeMillis();
