@@ -75,7 +75,7 @@ public class Sort {
     Space Complexity: O(N+K)
     #Best for elements having small value
     */
-    public static int[] counting(int[] arr){
+    public static void counting(int[] arr){
         int[] sorted = new int[arr.length];
         int max = Integer.MIN_VALUE;
         for (int element : arr){
@@ -97,7 +97,9 @@ public class Sort {
             sorted[counting[i]] = i;
             counting[i]++;
         }
-        return sorted;
+        for (int i=0; i< arr.length; i++){
+            arr[i] = sorted[i];
+        }
     }
 
     /*Quick Sort
@@ -141,5 +143,49 @@ public class Sort {
             arr[a] = arr[b];
             arr[b] = temp;
         } else System.out.println("Cant Swap"+a+" "+b);
+    }
+    /*Merge Sort
+    Time complexity: O(NlgN)
+    Space Complexity: O(N)
+    #Fast in all cases
+    */
+    public static void merge(int[] arr){
+        mergeSort(arr, 0, arr.length-1);
+    }
+    public static void mergeSort(int[] arr, int low, int high){
+        if (low < high){
+            int mid = (low + high) / 2;
+            mergeSort(arr, low, mid);
+            mergeSort(arr, mid+1, high);
+            mergeSorted(arr, low, mid, high);
+        }
+    }
+
+    public static void mergeSorted(int[] arr, int low, int mid, int high) {
+        int pointer1 = low, pointer2 = mid+1, index = 0;
+        int[] merged = new int[high-low+1];
+        while ( pointer1 <= mid && pointer2 <= high ){
+            if (arr[pointer1] < arr[pointer2]){
+                merged[index] = arr[pointer1];
+                pointer1++;
+            } else{
+                merged[index] = arr[pointer2];
+                pointer2++;
+            }
+            index++;
+        }
+        while (pointer1 <= mid){
+            merged[index] = arr[pointer1];
+            pointer1++;
+            index++;
+        }
+        while (pointer2 <= high){
+            merged[index] = arr[pointer2];
+            pointer2++;
+            index++;
+        }
+        for (int i=0; i< merged.length; i++){
+            arr[low+i] = merged[i];
+        }
     }
 }
